@@ -19,8 +19,11 @@ def json_response(payload, status=200):
 
 # "Banco de dados" em memória
 filmes = [
-    {"id": 1, "name": "Vingadores"},
-    {"id": 2, "name": "Corra"}
+    {"id": 1, "name": "Vingadores", "diretor": "Joss Whedon", "genero": "Ação"},
+    {"id": 2, "name": "Corra", "diretor": "Jordan Peele", "genero": "Terror"},
+    {"id": 3, "name": "Interestelar", "diretor": "Christopher Nolan", "genero": "Ficção Científica"},
+    {"id": 4, "name": "O Poderoso Chefão", "diretor": "Francis Ford Coppola", "genero": "Drama"},
+    {"id": 5, "name": "Matrix", "diretor": "Lana e Lilly Wachowski", "genero": "Ficção Científica"}
 ]
 
 # ✅ Rota para servir o HTML
