@@ -145,7 +145,7 @@ break;
                                 break;
 
                             case 2:
-                                triangulo.validarRetangulo();
+                                triangulo.validar_Possivel_Retangulo();
                                 break;
 
                         }
