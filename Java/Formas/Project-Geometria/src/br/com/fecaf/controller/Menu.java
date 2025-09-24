@@ -77,7 +77,7 @@ public class Menu {
                                 break;
                         }
                     }
-break;
+                    break;
                 case 2:
 
                     boolean exitCirculo = false;
@@ -127,13 +127,20 @@ break;
 
                 case 3:
                     boolean exitTriangulo = false;
+
                     while (!exitTriangulo) {
-                        System.out.println("/*****************************************");
-                        System.out.println("/*               Menu                    *");
-                        System.out.println("/*****************************************");
+                        System.out.println("/******************************************");
+                        System.out.println("/*               Menu                     *");
+                        System.out.println("/                                         *");
                         System.out.println("*1- Cadastrar Triangulo                   *");
                         System.out.println("*2- Validar se é um triangulo retangulo   *");
-
+                        System.out.println("3- Calcular Perimetro                     *");
+                        System.out.println("4- calcular área                          *");
+                        System.out.println("5- Verificando o Tipo do Triangulo        *");
+                        System.out.println("6- verificar Triangulo Retangulo          *");
+                        System.out.println("7- Exibir Informações                     *");
+                        System.out.println("8- Sair                                   *");
+                        System.out.println("/*");
 
                         int userOptionTriangulo = scanner.nextInt();
                         scanner.nextLine();
@@ -148,7 +155,34 @@ break;
                                 triangulo.validar_Possivel_Retangulo();
                                 break;
 
+                            case 3:
+                                retangulo.calcularPerimetro();
+                                break;
+
+                            case 4:
+                                triangulo.calcularArea();
+                                break;
+
+                            case 5:
+                                triangulo.Tipo_Triangulo();
+                                break;
+
+                            case 6:
+                                triangulo.verificarTrianguloRetangulo();
+                                break;
+
+                            case 7:
+                                triangulo.exibirInformacoes();
+                                break;
+
+                            case 8:
+                                System.out.println("Saindo...");
+                                exitRetangulo = true;
+                                System.out.println("Opção inválida.");
+                                break;
+
                         }
+
                     }
             }
         }

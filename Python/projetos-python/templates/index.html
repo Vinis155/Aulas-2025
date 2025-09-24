@@ -16,7 +16,7 @@
     header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
     h1{ margin:0; font-size:clamp(20px, 2.8vw, 28px); }
     .card{
-      background:rgba(250, 135, 252, 0.75);
+      background:rgba(0, 9, 93, 0.75);
       backdrop-filter: blur(6px);
       border:1px solid rgba(255,255,255,.06);
       border-radius:16px; padding:16px;
@@ -62,23 +62,23 @@
       <div class="stack" style="flex-direction:column; gap:16px">
         <!-- Listar -->
         <div class="card">
-          <h3 style="margin-top:0">Listar títulos</h3>
+          <h3 style="margin-top:0">Listar filmes</h3>
           <div class="stack">
-            <button onclick="listTitulos()">Listar</button>
+            <button onclick="listFilmes()">Listar</button>
             <span id="listMsg" class="msg"></span>
           </div>
         </div>
 
         <!-- Buscar por ID -->
         <div class="card">
-          <h3 style="margin-top:0">Buscar título por ID</h3>
+          <h3 style="margin-top:0">Buscar filme por ID</h3>
           <div class="row">
             <label>
               ID
-              <input id="getId" type="text" placeholder="Ex.: 1" onkeypress="if(event.key==='Enter'){getTitulo()}"/>
+              <input id="getId" type="text" placeholder="Ex.: 1" onkeypress="if(event.key==='Enter'){getFilme()}"/>
             </label>
             <div class="stack" style="align-items:flex-end">
-              <button class="secondary" onclick="getTitulo()">Buscar</button>
+              <button class="secondary" onclick="getFilme()">Buscar</button>
             </div>
           </div>
           <div id="getMsg" class="msg"></div>
@@ -86,53 +86,69 @@
 
         <!-- Criar -->
         <div class="card">
-          <h3 style="margin-top:0">Criar título</h3>
+          <h3 style="margin-top:0">Criar filme</h3>
           <div class="row">
             <label>
               ID
-              <input id="createId" type="text" placeholder="Ex.: 3" onkeypress="if(event.key==='Enter'){createTitulo()}"/>
+              <input id="createId" type="text" placeholder="Ex.: 3" onkeypress="if(event.key==='Enter'){createFilme()}"/>
             </label>
             <label>
               Nome
-              <input id="createName" type="text" placeholder="Ex.: Ana" onkeypress="if(event.key==='Enter'){createTitulo()}"/>
+              <input id="createName" type="text" placeholder="Ex.: Interestelar" onkeypress="if(event.key==='Enter'){createFilme()}"/>
+            </label>
+            <label>
+              Diretor
+              <input id="createDiretor" type="text" placeholder="Ex.: Christopher Nolan" onkeypress="if(event.key==='Enter'){createFilme()}"/>
+            </label>
+            <label>
+              Gênero
+              <input id="createGenero" type="text" placeholder="Ex.: Ficção Científica" onkeypress="if(event.key==='Enter'){createFilme()}"/>
             </label>
           </div>
           <div class="stack" style="margin-top:8px">
-            <button onclick="createTitulo()">Criar Filme</button>
+            <button onclick="createFilme()">Criar Filme</button>
             <span id="createMsg" class="msg"></span>
           </div>
         </div>
 
         <!-- Atualizar -->
         <div class="card">
-          <h3 style="margin-top:0">Atualizar título</h3>
+          <h3 style="margin-top:0">Atualizar filme</h3>
           <div class="row">
             <label>
               ID (alvo)
-              <input id="updateId" type="text" placeholder="Ex.: 2" onkeypress="if(event.key==='Enter'){updateTitulo()}"/>
+              <input id="updateId" type="text" placeholder="Ex.: 2" onkeypress="if(event.key==='Enter'){updateFilme()}"/>
             </label>
             <label>
               Nome (novo)
-              <input id="updateName" type="text" placeholder="Ex.: João Silva" onkeypress="if(event.key==='Enter'){updateTitulo()}"/>
+              <input id="updateName" type="text" placeholder="Ex.: Interestelar 2" onkeypress="if(event.key==='Enter'){updateFilme()}"/>
+            </label>
+            <label>
+              Diretor (novo)
+              <input id="updateDiretor" type="text" placeholder="Ex.: Christopher Nolan" onkeypress="if(event.key==='Enter'){updateFilme()}"/>
+            </label>
+            <label>
+              Gênero (novo)
+              <input id="updateGenero" type="text" placeholder="Ex.: Ficção Científica" onkeypress="if(event.key==='Enter'){updateFilme()}"/>
             </label>
           </div>
           <div class="stack" style="margin-top:8px">
-            <button class="secondary" onclick="updateTitulo()">Atualizar Filme</button>
+            <button class="secondary" onclick="updateFilme()">Atualizar Filme</button>
             <span id="updateMsg" class="msg"></span>
           </div>
         </div>
 
         <!-- Remover -->
         <div class="card">
-          <h3 style="margin-top:0">Remover título</h3>
+          <h3 style="margin-top:0">Remover filme</h3>
           <div class="row">
             <label>
               ID
-              <input id="deleteId" type="text" placeholder="Ex.: 1" onkeypress="if(event.key==='Enter'){deleteTitulo()}"/>
+              <input id="deleteId" type="text" placeholder="Ex.: 1" onkeypress="if(event.key==='Enter'){deleteFilme()}"/>
             </label>
           </div>
           <div class="stack" style="margin-top:8px">
-            <button class="warn" onclick="deleteTitulo()">Remover</button>
+            <button class="warn" onclick="deleteFilme()">Remover</button>
             <span id="deleteMsg" class="msg"></span>
           </div>
         </div>
@@ -210,64 +226,68 @@
     async function ping() {
       resetUI("listMsg");
       try {
-        const r = await api("/titulos");
+        const r = await api("/filmes");
         setMsg("listMsg", r.ok ? "Conectado! ✅" : `Falhou (${r.status})`, r.ok);
-        showOut("GET /titulos (ping)", r, r.ok);
+        showOut("GET /filmes (ping)", r, r.ok);
       } catch (e) {
         setMsg("listMsg", "Erro de conexão", false);
         showOut("Erro", { message: String(e) }, false);
       }
     }
 
-    async function listTitulos() {
+    async function listFilmes() {
       resetUI("listMsg");
-      const r = await api("/titulos");
+      const r = await api("/filmes");
       setMsg("listMsg", r.ok ? "OK" : `Erro ${r.status}`, r.ok);
-      showOut("GET /titulos", r, r.ok);
+      showOut("GET /filmes", r, r.ok);
     }
 
-    async function getTitulo() {
+    async function getFilme() {
       resetUI("getMsg");
       const id = $("getId").value;
       if (!id) return setMsg("getMsg", "Informe um ID válido.", false);
-      const r = await api(`/titulos/${id}`);
+      const r = await api(`/filmes/${id}`);
       setMsg("getMsg", r.ok ? "OK" : `Erro ${r.status}`, r.ok);
-      showOut(`GET /titulos/${id}`, r, r.ok);
+      showOut(`GET /filmes/${id}`, r, r.ok);
     }
 
-    async function createTitulo() {
+    async function createFilme() {
       resetUI("createMsg");
       const id = Number($("createId").value);
       const name = $("createName").value.trim();
-      if (!id || !name) return setMsg("createMsg", "Preencha ID e Nome.", false);
-      const r = await api("/titulos", {
+      const diretor = $("createDiretor").value.trim();
+      const genero = $("createGenero").value.trim();
+      if (!id || !name || !diretor || !genero) return setMsg("createMsg", "Preencha todos os campos.", false);
+      const r = await api("/filmes", {
         method: "POST",
-        body: JSON.stringify({ id, name })
+        body: JSON.stringify({ id, name, diretor, genero })
       });
       setMsg("createMsg", r.ok ? "Criado!" : `Erro ${r.status}`, r.ok);
-      showOut("POST /titulos", r, r.ok);
+      showOut("POST /filmes", r, r.ok);
     }
 
-    async function updateTitulo() {
+    async function updateFilme() {
       resetUI("updateMsg");
       const id = Number($("updateId").value);
       const name = $("updateName").value.trim();
-      if (!id || !name) return setMsg("updateMsg", "Preencha ID (alvo) e Nome.", false);
-      const r = await api(`/titulos/${id}`, {
+      const diretor = $("updateDiretor").value.trim();
+      const genero = $("updateGenero").value.trim();
+      if (!id || !name || !diretor || !genero) return setMsg("updateMsg", "Preencha todos os campos.", false);
+      const r = await api(`/filmes/${id}`, {
         method: "PUT",
-        body: JSON.stringify({ id, name })
+        body: JSON.stringify({ id, name, diretor, genero })
       });
       setMsg("updateMsg", r.ok ? "Atualizado!" : `Erro ${r.status}`, r.ok);
-      showOut(`PUT /titulos/${id}`, r, r.ok);
+      showOut(`PUT /filmes/${id}`, r, r.ok);
     }
 
-    async function deleteTitulo() {
+    async function deleteFilme() {
       resetUI("deleteMsg");
       const id = Number($("deleteId").value);
       if (!id) return setMsg("deleteMsg", "Informe um ID válido.", false);
-      const r = await api(`/titulos/${id}`, { method: "DELETE" });
+      const r = await api(`/filmes/${id}`, { method: "DELETE" });
       setMsg("deleteMsg", r.ok ? "Removido!" : `Erro ${r.status}`, r.ok);
-      showOut(`DELETE /titulos/${id}`, r, r.ok);
+      showOut(`DELETE /filmes/${id}`, r, r.ok);
     }
   </script>
 </body>

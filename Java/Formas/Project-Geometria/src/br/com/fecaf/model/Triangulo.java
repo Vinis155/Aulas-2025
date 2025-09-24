@@ -1,5 +1,6 @@
 package br.com.fecaf.model;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Triangulo {
@@ -31,7 +32,7 @@ public class Triangulo {
                 e.printStackTrace();
             }
 
-            System.out.print("Informe o lado2: ");
+            System.out.print("Informe o lado1: ");
             lado1 = scanner.nextDouble();
 
             try{Thread.sleep(1000);
@@ -40,7 +41,7 @@ public class Triangulo {
                 e.printStackTrace();
             }
 
-            System.out.print("Informe o lado3: ");
+            System.out.print("Informe o lado2: ");
             lado2 = scanner.nextDouble();
 
             System.out.println("Vericando se é um triangulo");
@@ -57,6 +58,7 @@ public class Triangulo {
 
             if (base + lado1 > lado2 && base + lado2 > lado1 && lado1 + lado2 > base) {
                 System.out.println("Triangulo cadastrado com Sucesso");
+
                 scanner.nextLine();
 
                 try{Thread.sleep(2000);
@@ -154,6 +156,10 @@ public class Triangulo {
 
     public void verificarTrianguloRetangulo() {
         double x, y, z;
+
+        double [] lados;
+
+        Arrays.sort(lados);
 
         // Descobre qual é a hipotenusa (maior lado)
         if (base >= lado1 && base >= lado2) {
