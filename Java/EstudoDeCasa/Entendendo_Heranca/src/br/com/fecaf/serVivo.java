@@ -1,8 +1,9 @@
 package br.com.fecaf;
 
-import java.util.Scanner;
+
 
 public class serVivo {
+
     protected int idade;
     protected String nome;
 

@@ -72,3 +72,57 @@ fn main() {
     dobrar(&mut x);
     println!("Fora da função: {}, agora mudou para 20", x);
 }
+
+
+//Criando hashmap em rust
+
+use std::collections::HashMap;
+
+fn main() {
+    // Criando um HashMap vazio
+    let mut capitais = HashMap::new();
+
+    // Inserindo elementos
+    capitais.insert("Brasil", "Brasília");
+    capitais.insert("França", "Paris");
+    capitais.insert("Japão", "Tóquio");
+
+    println!("{:?}", capitais);
+}
+
+if let some (capital) = capitais.get("Brasil") {
+    println! ("A capital do Brasil é {}", capital)
+}
+
+
+//Atualizar valor
+
+capitais.insert("Brasil","Rio de Janeiro");
+
+//Remover
+
+capitais.remove("França");
+
+//Iterar sobre todos os pares
+
+for (pais,capital) in &capitais {
+    println! ("{} -> {}",pais,capital);
+}
+
+
+//Hashmap + tupla
+
+use std::collections::HashMap;
+
+fn main() {
+    let mut usuarios: HashMap<u32, (String, i32, f64, bool, char)> = HashMap::new();
+
+    usuarios.insert(1, ("Ana".to_string(), 25, 3500.0, true, 'A'));
+    usuarios.insert(2, ("Bruno".to_string(), 30, 4200.5, false, 'B'));
+}
+
+// Buscar "linha" pelo ID
+if let Some(usuario) = usuarios.get(&1) {
+    println!("Registro 1 => {:?}", usuario);
+    println!("Nome: {}, Salário: {}", usuario.0, usuario.2);
+}
