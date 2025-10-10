@@ -1,0 +1,177 @@
+/* Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: #CC0000;
+    /* Vermelho Pokémon */
+    color: white;
+    padding: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Container que organiza os Cards */
+#pokemon-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Estilo do Card Dinâmico */
+.pokemon-card {
+    background-color: #fff;
+    border: 3px solid #333;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s;
+    /* Garante que o card se ajuste ao maior conteúdo, mas impede que fique muito pequeno */
+    min-height: 400px;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.pokemon-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 10px 0;
+    background-color: #f7f7f7;
+    border-radius: 50%;
+}
+
+.pokemon-card h2 {
+    font-size: 1.5em;
+    color: #000;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.pokemon-card .pokemon-id {
+    font-weight: 700;
+    color: #CC0000;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.pokemon-card .pokemon-description {
+    /* Sem limite de altura (cabe toda a descrição) */
+    font-size: 0.9em;
+    color: #444;
+    margin: 8px 0 10px 0;
+}
+
+/* ESTILO BASE DAS TIPAGENS */
+.pokemon-card .pokemon-types span {
+    display: inline-block;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin: 2px;
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* CORES TEMÁTICAS PARA CADA TIPO (Adicionado via classe JS) */
+.type-fire {
+    background-color: #FD7D24;
+}
+
+.type-grass {
+    background-color: #9BCC50;
+}
+
+.type-water {
+    background-color: #4592C4;
+}
+
+.type-bug {
+    background-color: #729F3F;
+}
+
+.type-normal {
+    background-color: #A4ACAF;
+}
+
+.type-poison {
+    background-color: #B97FC9;
+}
+
+.type-electric {
+    background-color: #FEEA4B;
+}
+
+.type-ground {
+    background-color: #F7DE3F;
+}
+
+.type-fairy {
+    background-color: #FDB9E9;
+}
+
+.type-fighting {
+    background-color: #D56723;
+}
+
+.type-psychic {
+    background-color: #F366B9;
+}
+
+.type-rock {
+    background-color: #A38C21;
+}
+
+.type-ghost {
+    background-color: #7B62A4;
+}
+
+.type-ice {
+    background-color: #51C4E7;
+}
+
+.type-dragon {
+    background-color: #53A4CF;
+}
+
+.type-steel {
+    background-color: #9EB7B8;
+}
+
+.type-dark {
+    background-color: #707070;
+}
+
+.type-flying {
+    background-color: #3DC7EF;
+}
