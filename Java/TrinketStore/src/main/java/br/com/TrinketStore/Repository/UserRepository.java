@@ -1,4 +1,11 @@
 package br.com.TrinketStore.Repository;
 
-public class UserRepository {
+import br.com.TrinketStore.Model.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public interface UserRepository extends JpaRepository<Usuario, Long>{
+
 }

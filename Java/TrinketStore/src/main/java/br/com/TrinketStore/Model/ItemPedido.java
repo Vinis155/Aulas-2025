@@ -1,8 +1,8 @@
-package br.com.TrinketStore.TrinketStore.Model;
+package br.com.TrinketStore.Model;
 
 public interface ItemPedido {
     Long getId();
-    produto getProduto();
+    Produto getProduto();
     int getQuantidade();
     double getPrecoTotal();
 }
