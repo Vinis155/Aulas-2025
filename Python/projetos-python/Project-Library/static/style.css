@@ -1,4 +1,4 @@
-/* Paleta de Cores:
+/* 🎨 Paleta de Cores:
    #2c3e50 - Dark Blue (Primária)
    #3498db - Blue (Secundária - para botões de ação positiva)
    #e74c3c - Red (Ação negativa/Excluir)
@@ -6,26 +6,36 @@
    #ffffff - White (Elementos)
 */
 
+/* Fundo geral */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f5f5f5; /* Fundo mais claro */
-    color: #34495e;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    color: #ffffff; /* texto branco */
+    background-image: url('Fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: url('history-book.png'), auto;
+   
 }
 
+.custom-cursor {
+    cursor: url('history-book.png'), auto;
+}
+
+/* Container principal */
 .container {
     max-width: 1000px;
     margin: 40px auto;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 8px; /* Cantos arredondados */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background: #000000; /* fundo preto */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
+/* Título */
 h1 {
-    color: #2c3e50;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 30px;
     border-bottom: 3px solid #3498db;
@@ -33,102 +43,116 @@ h1 {
     display: inline-block;
 }
 
-/* Tabela */
+/* 🧾 Tabela */
 #booksTable {
     width: 100%;
     margin-top: 20px;
-    border-collapse: separate; /* Para usar border-radius */
+    border-collapse: separate;
     border-spacing: 0;
-    background-color: #ffffff;
+    background-color: #000000; /* fundo preto */
     border-radius: 6px;
-    overflow: hidden; /* Garante que os cantos arredondados funcionem */
+    overflow: hidden;
+    color: #ffffff; /* texto branco */
 }
 
 th, td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid #ecf0f1; /* Linha divisória suave */
+    border-bottom: 1px solid #2c3e50; /* linhas discretas */
 }
 
 th {
-    background-color: #3498db;
-    color: white;
+    background-color: #111111; /* topo ligeiramente mais claro */
+    color: #3498db; /* azul da paleta */
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9; /* Zebrado suave */
+    background-color: #0f0f0f; /* leve contraste entre linhas */
 }
 
 tr:hover {
-    background-color: #f0f8ff; /* Efeito hover */
+   background-image: url(estante.jpeg);
 }
 
 td[contenteditable="true"] {
-    border: 1px dashed #bdc3c7; /* Indica que é editável */
-    padding: 11px 15px; /* Ajuste para compensar a borda */
+    border: 1px dashed #555;
+    padding: 11px 15px;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Formulário de Adição */
+/* 🧍‍♂️ Formulário de Adição */
 #addForm {
     display: flex;
     gap: 10px;
     padding: 20px 0;
-    border-top: 1px solid #ecf0f1;
+    border-top: 1px solid #2c3e50;
     margin-top: 20px;
 }
 
 #addForm h2 {
-    color: #2c3e50;
+    color: #ffffff;
     margin-bottom: 15px;
 }
 
 input[type="text"], input:not([type]) {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    background-color: #111111;
+    border: 1px solid #444;
+    color: #ffffff;
     border-radius: 4px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 input:focus {
     border-color: #3498db;
     outline: none;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
 }
 
-/* Botões */
+/* 🔘 Botões */
 button {
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s, transform 0.1s;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+    color: white;
 }
 
 button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px); /* Pequeno efeito de elevação */
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
+/* cores específicas dos botões */
 .btn.edit {
-    background-color: #2ecc71; /* Verde moderno */
-    color: white;
+    background-color: #2ecc71; /* verde */
 }
 
 .btn.delete {
-    background-color: #e74c3c; /* Vermelho moderno */
-    color: white;
+    background-color: #e74c3c; /* vermelho */
 }
 
 #addForm button {
-    background-color: #3498db; /* Azul primário */
-    color: white;
+    background-color: #3498db; /* azul */
 }
 
+/* Ações */
 .actions-cell {
-    white-space: nowrap; /* Impede que os botões quebrem linha */
+    white-space: nowrap;
+}
+
+/* 📚 Imagens dentro da tabela */
+.img-tabela {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
 }

@@ -5,39 +5,86 @@
     <title>Login | API de Livros</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        /* Estilos específicos para o card de login */
+        
+        /* 🌙 Estilo Dark do Card de Login */
+   body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("{{ url_for('static', filename='Fundo.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+}
+
+
         .login-card {
             max-width: 400px;
-            margin: 80px auto;
-            padding: 30px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.9); /* fundo preto translúcido */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
             text-align: center;
+            backdrop-filter: blur(6px);
         }
+
         .login-card h1 {
+            color: #ffffff;
             border-bottom: 2px solid #3498db;
             display: inline-block;
             padding-bottom: 10px;
             margin-bottom: 30px;
         }
+
         .login-card input {
             width: 100%;
             margin-bottom: 15px;
             padding: 12px;
-            box-sizing: border-box; 
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #111;
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s;
         }
+
+        .login-card input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+        }
+
         .login-card button {
             width: 100%;
             padding: 12px;
             background-color: #3498db;
             color: white;
             font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
         }
+
+        .login-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 12px rgba(52, 152, 219, 0.6);
+        }
+
         #loginMessage {
             margin-top: 15px;
-            color: #e74c3c; /* Cor de erro */
+            color: #e74c3c;
             font-weight: bold;
+        }
+
+        /* 📱 Responsividade */
+        @media (max-width: 480px) {
+            .login-card {
+                margin: 60px 20px;
+                padding: 30px;
+            }
         }
     </style>
 </head>
@@ -50,8 +97,7 @@
             <button type="submit">Entrar</button>
             <div id="loginMessage"></div>
         </form>
-        
-     
+    </div>
 
     <script src="{{ url_for('static', filename='login.js') }}"></script>
 </body>
