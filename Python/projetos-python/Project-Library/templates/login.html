@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | API de Livros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Estilos específicos para o card de login */
+        .login-card {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-card h1 {
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .login-card input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px;
+            box-sizing: border-box; 
+        }
+        .login-card button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            font-size: 1.1em;
+        }
+        #loginMessage {
+            margin-top: 15px;
+            color: #e74c3c; /* Cor de erro */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h1>🔐 Acesso Restrito</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Usuário (admin ou user)" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+            <div id="loginMessage"></div>
+        </form>
+        
+     
+
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
+</body>
+</html>

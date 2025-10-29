@@ -1,0 +1,134 @@
+/* Paleta de Cores:
+   #2c3e50 - Dark Blue (Primária)
+   #3498db - Blue (Secundária - para botões de ação positiva)
+   #e74c3c - Red (Ação negativa/Excluir)
+   #f5f5f5 - Light Gray (Fundo)
+   #ffffff - White (Elementos)
+*/
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5; /* Fundo mais claro */
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* Tabela */
+#booksTable {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: separate; /* Para usar border-radius */
+    border-spacing: 0;
+    background-color: #ffffff;
+    border-radius: 6px;
+    overflow: hidden; /* Garante que os cantos arredondados funcionem */
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1; /* Linha divisória suave */
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Zebrado suave */
+}
+
+tr:hover {
+    background-color: #f0f8ff; /* Efeito hover */
+}
+
+td[contenteditable="true"] {
+    border: 1px dashed #bdc3c7; /* Indica que é editável */
+    padding: 11px 15px; /* Ajuste para compensar a borda */
+}
+
+/* Formulário de Adição */
+#addForm {
+    display: flex;
+    gap: 10px;
+    padding: 20px 0;
+    border-top: 1px solid #ecf0f1;
+    margin-top: 20px;
+}
+
+#addForm h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+input[type="text"], input:not([type]) {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Botões */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px); /* Pequeno efeito de elevação */
+}
+
+.btn.edit {
+    background-color: #2ecc71; /* Verde moderno */
+    color: white;
+}
+
+.btn.delete {
+    background-color: #e74c3c; /* Vermelho moderno */
+    color: white;
+}
+
+#addForm button {
+    background-color: #3498db; /* Azul primário */
+    color: white;
+}
+
+.actions-cell {
+    white-space: nowrap; /* Impede que os botões quebrem linha */
+}
