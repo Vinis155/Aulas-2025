@@ -1,9 +1,9 @@
 package br.com.TrinketStore.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Produto {
@@ -16,7 +16,23 @@ public class Produto {
     private String descricao;
     private long ativo;
 
-    // Getters e Setters
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Price> prices = new ArrayList<>();
+
+    public List<Price> getPrices() {
+        return prices;
+    }
+
+    public void addPrice(Price price) {
+        prices.add(price);
+        price.setProduto(this); // Garante que o vínculo bidirecional seja mantido
+    }
+
+    public void removePrice(Price price) {
+        prices.remove(price);
+        price.setProduto(null);
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,4 +68,7 @@ public class Produto {
     public long isAtivo() {
         return ativo;
     }
+
+
+
 }

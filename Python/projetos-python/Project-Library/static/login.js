@@ -1,4 +1,3 @@
-// static/login.js (NOVO ARQUIVO)
 
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();

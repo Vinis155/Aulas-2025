@@ -1,4 +1,4 @@
-// static/script.js (MODIFICADO)
+
 
 const API_URL = "/books";
 
@@ -15,13 +15,13 @@ function getAuthHeaders() {
     };
 }
 
-// NOVO: Verifica se o botão deve ser desabilitado
+// Verifica se o botão deve ser desabilitado
 function canEdit() {
     const userRole = localStorage.getItem('userRole');
     return userRole === 'admin';
 }
 
-// NOVO: Adiciona um botão de Sair e checa o estado de login
+// Adiciona um botão de Sair e checa o estado de login
 function renderHeader() {
     const header = document.querySelector('.container'); // Use o container da página de livros
     let logoutButton = document.getElementById('logoutButton');
@@ -76,8 +76,7 @@ async function loadBooks() {
     });
 }
 
-// ... (as funções addBook, updateBook, deleteBook permanecem as mesmas de antes, 
-//      mas agora usam getAuthHeaders() que envia o token)
+//  getAuthHeaders() que envia o token)
 async function addBook() {
     if (!canEdit()) return alert("Apenas administradores podem adicionar livros.");
     const title = document.getElementById("title").value;

@@ -1,10 +1,6 @@
 package br.com.TrinketStore.Model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,22 +11,24 @@ public class Cliente extends Usuario {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos = new ArrayList<>();
 
-    // Construtor padrão necessário para JPA
+    // Construtor padrão exigido pelo JPA
     public Cliente() {
-        super(String .class.getName(), String.class.getName(), String.class.getName(), "cliente");
+        super(); // Chama o construtor vazio da classe mãe (Usuario)
     }
 
+    // Construtor personalizado
     public Cliente(String nome, String email, String senha) {
         super(nome, email, senha, "cliente");
     }
 
+    // Getters e Setters
     public List<Pedido> getPedidos() {
         return pedidos;
     }
 
     public void adicionarPedido(Pedido pedido) {
         pedidos.add(pedido);
-        pedido.setCliente(this); // garante o relacionamento bidirecional
+        pedido.setCliente(this); // Mantém o vínculo bidirecional
     }
 
     public void removerPedido(Pedido pedido) {

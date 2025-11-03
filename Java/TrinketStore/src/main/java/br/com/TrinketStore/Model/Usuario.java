@@ -5,34 +5,42 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.sql.Timestamp;
+
 @Entity
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_usuario")
 public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
     protected Long id;
 
-    @NotBlank(message = "O nome é obrigatório")
-    @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres")
+    @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(name = "nome_user", nullable = false)
     protected String nome;
 
-    @NotBlank(message = "O email é obrigatório")
-    @Email(message = "Email inválido")
+    @NotBlank
+    @Email
+    @Column(name = "email_user", nullable = false)
     protected String email;
 
-    @NotBlank(message = "A senha é obrigatória")
-    @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
+    @NotBlank
+    @Size(min = 6)
+    @Column(name = "senha_user", nullable = false)
     protected String senha;
 
-    @NotBlank(message = "O role é obrigatório")
+    @NotBlank
+    @Column(name = "ROLE", nullable = false)
     protected String role;
 
+    @Column(name = "created_at")
+    protected java.sql.Timestamp createdAt;
 
-    public Usuario() {
-
-    }
+    public Usuario() {}
 
     public Usuario(String nome, String email, String senha, String role) {
         this.nome = nome;
@@ -79,5 +87,13 @@ public abstract class Usuario {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }
