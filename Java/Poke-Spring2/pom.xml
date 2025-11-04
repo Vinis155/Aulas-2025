@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.com.fecaf</groupId>
+    <artifactId>project-pokemon</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Project-Pokemon</name>
+    <description>API e Front estilo Pokédex</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <spring-boot.version>3.3.1</spring-boot.version>
+    </properties>
+
+    <dependencies>
+        <!-- 🚀 Dependência base do Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 📦 Jackson para ler o JSON (já vem junto, mas deixamos explícito) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- 🧪 Para rodar testes (opcional) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- ⚙️ Plugin que empacota e executa o projeto -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

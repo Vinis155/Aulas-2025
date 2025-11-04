@@ -23,12 +23,11 @@ public class Price {
     @Column(name = "vigente_price", nullable = false)
     private boolean vigente = true;
 
-    // 🔗 Relação com Produto
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Produto produto;
 
-    // --- Getters e Setters ---
+
     public Long getId() { return id; }
 
     public String getStripePriceId() { return stripePriceId; }
