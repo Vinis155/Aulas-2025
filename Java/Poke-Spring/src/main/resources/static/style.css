@@ -1,3 +1,4 @@
+/* ======== BASE ======== */
 body {
     background: linear-gradient(180deg, #b80000, #400000);
     font-family: 'Press Start 2P', sans-serif;
@@ -17,6 +18,7 @@ body {
     box-shadow: 0 0 25px rgba(0,0,0,0.6);
 }
 
+/* ======== CABEÇALHO ======== */
 .pokedex-header {
     display: flex;
     align-items: center;
@@ -37,6 +39,84 @@ body {
 .yellow { background-color: #ffeb3b; }
 .green { background-color: #4caf50; }
 
+/* ======== BARRA DE BUSCA ======== */
+.search {
+    background: linear-gradient(180deg, #9b0000, #5a0000);
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    border-radius: 12px;
+    margin-top: 15px;
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.25),
+                0 0 20px rgba(0, 0, 0, 0.6);
+    border: 2px solid #ffeb3b;
+}
+
+.search input {
+    padding: 14px 20px;
+    width: 260px;
+    border: 2px solid #ffeb3b;
+    border-radius: 40px;
+    outline: none;
+    font-size: 0.9rem;
+    color: #222;
+    background: linear-gradient(180deg, #fffef2, #fff7c7);
+    text-align: center;
+    font-family: 'Press Start 2P', sans-serif;
+    transition: 0.3s;
+}
+
+.search input::placeholder {
+    color: #777;
+}
+
+.search input:focus {
+    border-color: #fff;
+    box-shadow: 0 0 12px #ffeb3b, inset 0 0 6px rgba(255, 255, 59, 0.4);
+}
+
+.search button {
+    background: radial-gradient(circle at 50% 40%, #ff0000 0%, #a00000 75%);
+    color: #fff;
+    border: 3px solid #000;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6),
+                inset 0 0 8px rgba(255, 255, 255, 0.2);
+    transition: transform 0.25s ease-in-out, box-shadow 0.3s;
+    animation: ledBlink 2s infinite alternate;
+    font-size: 0;
+}
+
+.search button:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 14px #ffeb3b, 0 0 24px rgba(255, 255, 255, 0.5);
+}
+
+.search button::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes ledBlink {
+    0% { box-shadow: 0 0 8px #ff0000, inset 0 0 5px #ff0000; }
+    100% { box-shadow: 0 0 15px #ffeb3b, inset 0 0 10px #ffeb3b; }
+}
+
+/* ======== TELA ======== */
 .screen {
     background: #222;
     border: 5px inset #111;
@@ -46,6 +126,7 @@ body {
     min-height: 400px;
 }
 
+/* ======== GRID ======== */
 .pokemon-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -59,11 +140,13 @@ body {
     text-align: center;
     padding: 10px;
     color: #fff;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .card:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
     background: #444;
 }
 
@@ -72,6 +155,7 @@ body {
     height: 100px;
 }
 
+/* ======== CONTROLES ======== */
 .controls {
     display: flex;
     justify-content: center;

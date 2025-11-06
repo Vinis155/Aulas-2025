@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
+
 </head>
 <body>
 <div class="pokedex">
@@ -15,6 +16,12 @@
         <h1>Pokédex</h1>
     </div>
 
+    <div class="search">
+        <input type="number" id="search-id" placeholder="Digite o ID do Pokémon">
+        <button id="search-btn">Buscar</button>
+    </div>
+
+
     <div class="screen">
         <div id="pokemon-container" class="pokemon-grid"></div>
     </div>
@@ -24,6 +31,7 @@
         <button id="next-btn" class="btn">➡️</button>
     </div>
 </div>
+
 
 <script src="script.js"></script>
 </body>
