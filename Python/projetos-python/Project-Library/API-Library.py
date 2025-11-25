@@ -37,9 +37,10 @@ def json_response(payload, status=200):
 
 #Nome da tabela e seus atributos
 books = [
-    {"id": 1, "title": "1984", "author": "George Orwell"},
-    {"id": 2, "title": "O Pequeno Príncipe", "author": "Antoine de Saint-Exupéry"}
+    {"id": 1, "title": "1984", "author": "George Orwell", "status": "disponível"},
+    {"id": 2, "title": "O Pequeno Príncipe", "author": "Antoine de Saint-Exupéry", "status": "alugado"}
 ]
+
 
 #Usuários em memória (Token/ID será o username) aqui define os "papeis" de cada usuario
 users = {
@@ -89,6 +90,31 @@ def index():
 def livros_page():
     return render_template("livros.html")
 
+#Cria a rota para listar os livros disponíveis
+@app.route("/livros/disponiveis")
+def dis_page():
+    return render_template("disponiveis.html")
+
+#Cria a rota da API para listar os livros disponíveis
+@app.get("/api/disponiveis")
+def listar_disponiveis():
+    disponiveis = [b for b in books if b["status"] == "disponível"]
+    return json_response(disponiveis)
+
+#Cria a rota para listar os livros alugados
+@app.route("/livros/alugados")
+def Alugados_page():
+    return render_template("alugados.html")
+
+#Cria a rota da API para listar os livros alugados
+@app.get("/api/alugados") 
+def listar_alugados():
+    alugados = [b for b in books if b["status"] == "alugado"]
+    return json_response(alugados)
+
+
+
+
 #O Flask envia o conteúdo do arquivo login.html. 
 # O JavaScript de login dessa página é responsável por enviar as credenciais para a próxima rota 
 # (/auth/login).
@@ -134,27 +160,34 @@ def create_book():
     #Garante que sempre o novo ID vai ser sequencial e não repetido.
     new_id = max(book["id"] for book in books) + 1 if books else 1
     #Cria um novo dicionaria contando com o novo id que foi criado e pega os dados de livro e autor
-    new_book = {"id": new_id, "title": data.get("title", ""), "author": data.get("author", "")}
+    new_book = {
+    "id": new_id,
+    "title": data.get("title", ""),
+    "author": data.get("author", ""),
+    "status": data.get("status", "disponível")  # ← ADICIONADO!
+}
     #Adiciona no banco o novo livro
     books.append(new_book)
     return json_response(new_book, status=201)
 
 
-#Informa que a requisição vai ser do tipo PUT'
+
+#Realiza uma iteração na lista de livros    
 @app.route("/books/<int:book_id>", methods=["PUT"])
-@admin_required # apenas usuario do tipo role admin pode executar 
-def update_book(book_id): # A função recebe o book_id da URL como argumento.
-    data = request.get_json(silent=True) or {} #Aqui esta recebendo as novas informações que 
-    #vão ser atualizadas
-    
-    #Verifica o ID correspondente ao ID que precisa ser atualizado
+@admin_required
+
+def update_book(book_id):
+    data = request.get_json(silent=True) or {}
+
     for book in books:
-        if book["id"] == book_id: #Em cada iteração verifica se o ID é correspondente que veio da URL
-            #O .get("title") tenta buscar o novo título dentro do dicionário data (os dados enviados pelo frontend).
+        if book["id"] == book_id:
             book["title"] = data.get("title", book["title"])
             book["author"] = data.get("author", book["author"])
-            return json_response(book) #Se for encontrado e atualizado retorna atualizado com o status padrão
+            book["status"] = data.get("status", book["status"])  # ← AQUI ESTÁ O SEGREDO
+            return json_response(book)
+
     return json_response({"error": "Livro não encontrado"}, status=404)
+
 
 
 #Informa que a requisição vai ser do tipo DELETE e que ela recebe o book_id da URL.

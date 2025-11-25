@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nomemusic": "Deixa Acontecer",
+    "artista": "Grupo Revelação",
+    "ano": 2016,
+    "genre": "Pagode",
+    "duracao": 4.20
+  },
+  {
+    "id": 2,
+    "nomemusic": "Evidências",
+    "artista": "Chitãozinho & Xororó",
+    "ano": 1990,
+    "genre": "Sertanejo",
+    "duracao": 3.55
+  },
+  {
+    "id": 3,
+    "nomemusic": "Pra Você Guardei o Amor",
+    "artista": "Nando Reis & Ana Cañas",
+    "ano": 2016,
+    "genre": "MPB",
+    "duracao": 4.25
+  }
+]

@@ -6,31 +6,224 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>📚 Biblioteca Interativa</h1>
 
-        <h2>Adicionar novo livro</h2>
-        <div id="addForm">
-            <input id="title" placeholder="Título do Livro" type="text"> 
-            <input id="author" placeholder="Autor do Livro" type="text">
-            <button onclick="addBook()">Adicionar Livro</button>
+<!-- MENU SUPERIOR -->
+<nav class="navbar">
+    <ul>
+        <li><a href="/livros">📚 Biblioteca</a></li>
+        <li><a href="/livros/disponiveis">📗 Disponíveis</a></li>
+        <li><a href="/livros/alugados">📕 Alugados</a></li>
+        <li><a href="#" onclick="logout()">🚪 Sair</a></li>
+    </ul>
+</nav>
+
+<script>
+    function logout() {
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userRole");
+        window.location.href = "/login";
+    }
+</script>
+
+<div class="container">
+<div class="header-row">
+    <h1>📚 Biblioteca Interativa</h1>
+
+    <button class="btn add-button" onclick="openAddModal()">
+        ➕ Adicionar Livro
+    </button>
+</div>
+
+
+
+    <!-- 🔥 MODAL DE ADICIONAR LIVRO -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <h2>Adicionar Livro</h2>
+
+            <label>Título:</label>
+            <input id="newTitle" type="text">
+
+            <label>Autor:</label>
+            <input id="newAuthor" type="text">
+
+            <label>Status:</label>
+            <div class="custom-select">
+                <select id="newStatus">
+                    <option value="disponível">Disponível</option>
+                    <option value="alugado">Alugado</option>
+                </select>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn edit" onclick="saveNewBook()">Salvar</button>
+                <button class="btn delete" onclick="closeAddModal()">Cancelar</button>
+            </div>
         </div>
-        
-        <hr style="border: 0; border-top: 1px solid #ecf0f1; margin: 20px 0;">
-
-        <table id="booksTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                </tbody>
-        </table>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <hr style="border: 0; border-top: 1px solid #ecf0f1; margin: 20px 0;">
+
+    <table id="booksTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+<!-- 🔥 MODAL DE EDIÇÃO -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h2>Editar Livro</h2>
+
+        <label>Título:</label>
+        <input id="editTitle" type="text">
+
+        <label>Autor:</label>
+        <input id="editAuthor" type="text">
+
+        <label>Status:</label>
+        <div class="custom-select">
+            <select id="editStatus">
+                <option value="disponível">Disponível</option>
+                <option value="alugado">Alugado</option>
+            </select>
+        </div>
+
+        <div class="modal-buttons">
+            <button class="btn edit" onclick="saveEdit()">Salvar</button>
+            <button class="btn delete" onclick="closeModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<style>
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: #111;
+    padding: 25px;
+    border-radius: 10px;
+    width: 350px;
+    color: white;
+    box-shadow: 0 0 12px rgba(255,255,255,0.2);
+}
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #000;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 5px;
+}
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+</style>
+
+<script>
+let editingId = null;
+
+// Carregar livros da API
+function loadBooks() {
+    fetch("/books")
+        .then(res => res.json())
+        .then(livros => {
+            const tbody = document.getElementById("tableBody");
+
+            tbody.innerHTML = livros.map(livro => `
+                <tr>
+                    <td>${livro.id}</td>
+                    <td>${livro.title}</td>
+                    <td>${livro.author}</td>
+                    <td>${livro.status}</td>
+                    <td>
+                        <button class="btn edit" onclick="openModal(${livro.id}, '${livro.title}', '${livro.author}', '${livro.status}')">Editar</button>
+                        <button class="btn delete" onclick="deleteBook(${livro.id})">Excluir</button>
+                    </td>
+                </tr>
+            `).join("");
+        });
+}
+loadBooks();
+
+/* MODAL DE EDIÇÃO */
+function openModal(id, title, author, status) {
+    editingId = id;
+    document.getElementById("editTitle").value = title;
+    document.getElementById("editAuthor").value = author;
+    document.getElementById("editStatus").value = status;
+    document.getElementById("editModal").style.display = "flex";
+}
+function closeModal() {
+    document.getElementById("editModal").style.display = "none";
+}
+function saveEdit() {
+    const title = document.getElementById("editTitle").value;
+    const author = document.getElementById("editAuthor").value;
+    const status = document.getElementById("editStatus").value;
+
+    fetch(`/books/${editingId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Auth-Token": "admin"
+        },
+        body: JSON.stringify({ title, author, status })
+    })
+    .then(() => location.reload());
+}
+
+/* MODAL DE ADIÇÃO */
+function openAddModal() {
+    document.getElementById("addModal").style.display = "flex";
+}
+function closeAddModal() {
+    document.getElementById("addModal").style.display = "none";
+}
+function saveNewBook() {
+    const title = document.getElementById("newTitle").value;
+    const author = document.getElementById("newAuthor").value;
+    const status = document.getElementById("newStatus").value;
+
+    fetch("/books", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Auth-Token": "admin"
+        },
+        body: JSON.stringify({ title, author, status })
+    })
+    .then(() => location.reload());
+}
+
+/* DELETAR */
+function deleteBook(id) {
+    fetch(`/books/${id}`, {
+        method: "DELETE",
+        headers: { "X-Auth-Token": "admin" }
+    })
+    .then(() => location.reload());
+}
+</script>
+
 </body>
 </html>

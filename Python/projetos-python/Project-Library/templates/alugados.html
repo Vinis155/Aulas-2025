@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Livros Alugados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="custom-cursor">
+
+<!-- MENU SUPERIOR -->
+<nav class="navbar">
+    <ul>
+        <li><a href="/livros">📚 Biblioteca</a></li>
+        <li><a href="/livros/disponiveis">📗 Disponíveis</a></li>
+        <li><a href="/livros/alugados">📕 Alugados</a></li>
+        <li><a href="/login">🚪 Sair</a></li>
+    </ul>
+</nav>
+
+
+
+<h1>📕 Livros Alugados</h1>
+
+<div class="container">
+    <table id="booksTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+<script>
+    fetch("/api/alugados")
+        .then(res => res.json())
+        .then(livros => {
+            const tbody = document.getElementById("tableBody");
+
+            tbody.innerHTML = livros.map(livro => `
+                <tr>
+                    <td>${livro.id}</td>
+                    <td>${livro.title}</td>
+                    <td>${livro.author}</td>
+                    <td>
+                        <div class="custom-select">
+                            <select class="statusSelect" data-id="${livro.id}">
+                                <option value="disponível" ${livro.status === "disponível" ? "selected" : ""}>Disponível</option>
+                                <option value="alugado" ${livro.status === "alugado" ? "selected" : ""}>Alugado</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            `).join("");
+
+            document.querySelectorAll(".statusSelect").forEach(select => {
+                select.addEventListener("change", () => {
+                    const id = select.getAttribute("data-id");
+                    const novoStatus = select.value;
+
+                    fetch(`/books/${id}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Auth-Token": "admin"
+                        },
+                        body: JSON.stringify({ status: novoStatus })
+                    })
+                    .then(r => r.json())
+                    .then(() => location.reload());
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

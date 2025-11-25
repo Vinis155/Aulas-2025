@@ -125,4 +125,12 @@ async function deleteBook(id) {
     loadBooks();
 }
 
+function openAddModal() {
+    document.getElementById("addModal").style.display = "flex";
+}
+
+function closeAddModal() {
+    document.getElementById("addModal").style.display = "none";
+}
+
 loadBooks();
